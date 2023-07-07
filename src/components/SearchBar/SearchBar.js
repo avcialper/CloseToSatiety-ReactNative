@@ -16,8 +16,11 @@ export default ({ handleLocation }) => {
             }}
             onPress={(data, details = null) => {
                 handleLocation(
-                    details?.geometry.location.lat,
-                    details?.geometry.location.lng
+                    {
+                        lat: details?.geometry.location.lat,
+                        long: details?.geometry.location.lng
+                    },
+                    'restaurant'
                 )
             }}
             styles={{
