@@ -20,7 +20,19 @@ export default ({ handleLocation }) => {
                         lat: details?.geometry.location.lat,
                         long: details?.geometry.location.lng
                     },
-                    'restaurant'
+                    'restaurant',
+                    {
+                        address: details?.formatted_address,
+                        name: details?.name,
+                        photoURL: details?.photos[0].photo_reference !== undefined ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=300&photoreference=${details?.photos[0].photo_reference}&key=${GOOGLE_API}` :
+                            'https://www.shutterstock.com/image-vector/details?-logo-food-service-vector-600w-454784548.jpg',
+                        openNow: details?.opening_hours.open_now === undefined ? null : details?.opening_hours.open_now,
+                        rating: details?.rating,
+                        ratingTotal: details?.user_ratings_total,
+                        icon: details?.icon,
+                        lat: details?.geometry.location.lat,
+                        long: details?.geometry.location.lng
+                    }
                 )
             }}
             styles={{

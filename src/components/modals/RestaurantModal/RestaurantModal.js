@@ -22,17 +22,14 @@ export default ({ data, isVisible, closeRestaurantModal }) => {
         >
             {data &&
                 <View style={styles.container} >
-                    <Image source={{
-                        uri: data.photoURL !== null ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=300&photoreference=${data.photoURL}&key=${GOOGLE_API}` :
-                            'https://www.shutterstock.com/image-vector/restaurant-logo-food-service-vector-600w-454784548.jpg'
-                    }}
+                    <Image source={{ uri: data.photoURL }}
                         style={styles.image} />
                     <View style={styles.innerContainer} >
                         <View style={styles.upperContainer} >
                             <Text style={styles.name} >{data.name}</Text>
                             <View style={styles.upperRightContainer} >
                                 <Text style={[styles.openClosed, data.openNow === null ? { color: '#f2600a' } : data.openNow ? { color: 'green' } : { color: 'red' }]} >{data.openNow === null ? 'Unknow' : data.openNow ? 'Open' : 'Closed'}</Text>
-                                <Image source={{uri: data.icon}} style={styles.icon} />
+                                <Image source={{ uri: data.icon }} style={styles.icon} />
                             </View>
                         </View>
                         <View style={styles.ratingContainer} >

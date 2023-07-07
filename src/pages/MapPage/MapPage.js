@@ -5,6 +5,7 @@ import useFetch from '../../hooks/useFetch'
 import SearchBar from '../../components/SearchBar'
 import UserMarker from '../../components/markers/UserMarker'
 import RestaurantModal from '../../components/modals/RestaurantModal'
+import RestaurantMarker from '../../components/markers/RestaurantMarker'
 import UserButton from '../../components/UserButton'
 import styles from './MapPage.style'
 import { renderRestaurantMarkers, requestLocationPermission } from '../../utils/functions'
@@ -61,6 +62,7 @@ export default () => {
             >
                 <UserMarker coordinate={userCoordinate} />
                 {data && renderRestaurantMarkers(data, handleMarkerClick)}
+                {restaurantData !== null && <RestaurantMarker onPress={handleMarkerClick} restaurant={restaurantData} key={restaurantData.place_id} />}
             </MapView>
             <RestaurantModal
                 data={restaurantData}

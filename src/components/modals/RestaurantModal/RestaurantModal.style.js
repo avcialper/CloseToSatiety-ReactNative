@@ -44,7 +44,8 @@ export default StyleSheet.create({
     },
     icon: {
         width: 20,
-        height: 20
+        height: 20,
+        marginTop: 8
     },
     address: {
         fontSize: 14,
