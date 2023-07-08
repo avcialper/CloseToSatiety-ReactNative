@@ -12,7 +12,7 @@ export default ({ handleLocation }) => {
             enablePoweredByContainer={false}
             query={{
                 key: GOOGLE_API,
-                language: 'tr'
+                language: 'en'
             }}
             onPress={(data, details = null) => {
                 handleLocation(

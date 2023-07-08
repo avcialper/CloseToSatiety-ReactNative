@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import MapPage from './pages/MapPage'
+import FlashMessage from 'react-native-flash-message'
 
 const Tab = createMaterialBottomTabNavigator()
 
@@ -12,6 +13,7 @@ export default () => {
         <Tab.Screen name='map' component={MapPage} options={{ title: 'Map', tabBarIcon: 'google-maps' }} />
         <Tab.Screen name='favorites' component={MapPage} options={{ title: 'Favorites', tabBarIcon: 'heart' }} />
       </Tab.Navigator>
+      <FlashMessage position={'top'} />
     </NavigationContainer>
   )
 }

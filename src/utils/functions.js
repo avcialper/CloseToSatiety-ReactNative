@@ -2,6 +2,7 @@ import { PermissionsAndroid } from "react-native"
 import Geolocation from 'react-native-geolocation-service'
 import RestaurantMarker from "../components/markers/RestaurantMarker"
 import {GOOGLE_API} from '@env'
+import { showMessage } from "react-native-flash-message"
 
 export function renderRestaurantMarkers(restaurantsData, handleMarkerClick) {
     return restaurantsData.map(restaurant => {
@@ -58,5 +59,16 @@ export async function requestLocationPermission() {
                 console.warn(error)
                 reject(error)
             })
+    })
+}
+
+export function showFlashMesssage(message) {
+    console.log(message)
+    showMessage({
+        message: message,
+        type: 'default',
+        backgroundColor: '#f2600a',
+        color: 'black',
+        animationDuration: 800
     })
 }

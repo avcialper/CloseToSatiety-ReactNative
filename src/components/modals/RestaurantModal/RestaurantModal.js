@@ -1,11 +1,10 @@
 import React from 'react'
-import { View, Text, Image } from 'react-native'
+import { View, Text, Image, Pressable } from 'react-native'
 import Modal from 'react-native-modal'
 import { Rating } from 'react-native-ratings'
-import { GOOGLE_API } from '@env'
 import styles from './RestaurantModal.style'
 
-export default ({ data, isVisible, closeRestaurantModal }) => {
+export default ({ data, isVisible, closeRestaurantModal, onDirectionButtonPress }) => {
 
     return (
         <Modal
@@ -29,7 +28,7 @@ export default ({ data, isVisible, closeRestaurantModal }) => {
                             <Text style={styles.name} >{data.name}</Text>
                             <View style={styles.upperRightContainer} >
                                 <Text style={[styles.openClosed, data.openNow === null ? { color: '#f2600a' } : data.openNow ? { color: 'green' } : { color: 'red' }]} >{data.openNow === null ? 'Unknow' : data.openNow ? 'Open' : 'Closed'}</Text>
-                                <Image source={{ uri: data.icon }} style={styles.icon} />
+                                <Image source={{ uri: data.icon }} style={styles.typeIcon} />
                             </View>
                         </View>
                         <View style={styles.ratingContainer} >
@@ -42,7 +41,12 @@ export default ({ data, isVisible, closeRestaurantModal }) => {
                             />
                             <Text style={styles.rating} >{data.rating} ({data.ratingTotal})</Text>
                         </View>
-                        <Text style={styles.address} >{data.address}</Text>
+                        <View style={styles.bottomContainer} >
+                            <Text style={styles.address} >{data.address}</Text>
+                            <Pressable style={styles.directionIconContainer} onPress={onDirectionButtonPress} >
+                                <Image source={require('../../../assets/direction.png')} style={styles.directionIcon} />
+                            </Pressable>
+                        </View>
                     </View>
                 </View>
             }

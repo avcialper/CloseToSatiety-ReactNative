@@ -42,7 +42,7 @@ export default StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold'
     },
-    icon: {
+    typeIcon: {
         width: 20,
         height: 20,
         marginTop: 8
@@ -50,10 +50,8 @@ export default StyleSheet.create({
     address: {
         fontSize: 14,
         fontWeight: '500',
-        color: 'black'
-    },
-    openClose: {
-
+        color: 'black',
+        width: '78%'
     },
     ratingContainer: {
         flexDirection: 'row',
@@ -63,5 +61,16 @@ export default StyleSheet.create({
         fontSize: 14,
         fontWeight: '500',
         marginHorizontal: 12
+    },
+    bottomContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    directionIconContainer: {
+        borderWidth: 1,
+        borderRadius: 8,
+        borderColor: 'rgba(0, 0,  0, 0.5)',
+        marginHorizontal: 8,
+        padding: 8
     }
 })
