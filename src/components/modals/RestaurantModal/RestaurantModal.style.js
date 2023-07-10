@@ -65,12 +65,5 @@ export default StyleSheet.create({
     bottomContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between'
-    },
-    directionIconContainer: {
-        borderWidth: 1,
-        borderRadius: 8,
-        borderColor: 'rgba(0, 0,  0, 0.5)',
-        marginHorizontal: 8,
-        padding: 8
     }
 })

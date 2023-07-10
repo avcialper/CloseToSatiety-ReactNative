@@ -1,6 +1,7 @@
 import { LogBox } from 'react-native'
 import MapViewDirections from 'react-native-maps-directions'
 import { showFlashMesssage } from '../../utils/functions'
+import colors from '../../utils/colors'
 import { GOOGLE_API } from '@env'
 
 export default ({ userCoordinate, restaurantData, handleWayData }) => {
@@ -16,7 +17,7 @@ export default ({ userCoordinate, restaurantData, handleWayData }) => {
                 longitude: restaurantData.long
             }}
             strokeWidth={4}
-            strokeColor='#42d4f5'
+            strokeColor= {colors.roadLine}
             onReady={result => {
                 handleWayData(result)
             }}

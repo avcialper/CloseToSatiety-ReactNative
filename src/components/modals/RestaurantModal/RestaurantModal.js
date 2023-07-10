@@ -2,9 +2,11 @@ import React from 'react'
 import { View, Text, Image, Pressable } from 'react-native'
 import Modal from 'react-native-modal'
 import { Rating } from 'react-native-ratings'
+import DrawRoadButton from '../../DrawRoadButton'
+import FavoriteButton from '../../FavoriteButton'
 import styles from './RestaurantModal.style'
 
-export default ({ data, isVisible, closeRestaurantModal, onDirectionButtonPress }) => {
+export default ({ data, isVisible, closeRestaurantModal, onDirectionButtonPress, buttonTitle = "akslf" }) => {
 
     return (
         <Modal
@@ -43,10 +45,9 @@ export default ({ data, isVisible, closeRestaurantModal, onDirectionButtonPress 
                         </View>
                         <View style={styles.bottomContainer} >
                             <Text style={styles.address} >{data.address}</Text>
-                            <Pressable style={styles.directionIconContainer} onPress={onDirectionButtonPress} >
-                                <Image source={require('../../../assets/direction.png')} style={styles.directionIcon} />
-                            </Pressable>
+                            <DrawRoadButton onDirectionButtonPress={onDirectionButtonPress} />
                         </View>
+                        <FavoriteButton text={buttonTitle} onPress={() => console.log('first')} />
                     </View>
                 </View>
             }

@@ -9,6 +9,7 @@ export function renderRestaurantMarkers(restaurantsData, handleMarkerClick) {
         return (
             <RestaurantMarker
                 restaurant={{
+                    id: restaurant.place_id,
                     address: restaurant.formatted_address,
                     name: restaurant.name,
                     photoURL: restaurant.photos[0].photo_reference !== undefined ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=300&photoreference=${restaurant.photos[0].photo_reference}&key=${GOOGLE_API}` :
@@ -69,6 +70,7 @@ export function showFlashMesssage(message) {
         type: 'default',
         backgroundColor: '#f2600a',
         color: 'black',
-        animationDuration: 800
+        animationDuration: 800,
+        floating: true
     })
 }

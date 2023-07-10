@@ -12,13 +12,13 @@ import UserButton from '../../components/UserButton'
 import styles from './MapPage.style'
 import { renderRestaurantMarkers, requestLocationPermission } from '../../utils/functions'
 
-export default () => {
+export default ({ route }) => {
 
     const [userCoordinate, setUserCoordinate] = React.useState({ lat: 37.78, long: -122.43 })
     const [restaurantData, setRestaurantData] = React.useState(null)
     const [restaurantModalVisible, setRestaurantModalVisible] = React.useState(false)
     const [roadData, setRoadData] = React.useState({ distance: null, duration: null })
-    const [drawTheWay, setDrawTheWay] = React.useState(false)
+    const [drawTheRoad, setDrawTheRoad] = React.useState(false)
 
     React.useEffect(() => {
         const getLocation = async () => {
@@ -28,6 +28,13 @@ export default () => {
         }
         getLocation()
     }, [])
+
+    React.useEffect(() => {
+        if (route?.params !== undefined) {
+            setRestaurantData(route.params.data)
+            setDrawTheRoad(true)
+        }
+    }, [route])
 
     const { data, loading, error } = useFetch(userCoordinate)
     const mapRef = React.useRef()
@@ -41,8 +48,9 @@ export default () => {
         })
         if (type === 'restaurant') {
             setRestaurantData(restaurantData)
+            console.log(restaurantData)
             setRestaurantModalVisible(true)
-            setDrawTheWay(false)
+            setDrawTheRoad(false)
         }
     }
 
@@ -62,7 +70,7 @@ export default () => {
                 duration: result.duration
             })
         } else {
-            setDrawTheWay(false)
+            setDrawTheRoad(false)
         }
     }
 
@@ -72,6 +80,7 @@ export default () => {
 
     return (
         <View style={styles.container} >
+            {/*
             <MapView
                 ref={mapRef}
                 initialRegion={{
@@ -86,24 +95,25 @@ export default () => {
                 <UserMarker coordinate={userCoordinate} />
                 {data && renderRestaurantMarkers(data, handleMarkerClick)}
                 {restaurantData && <RestaurantMarker onPress={handleMarkerClick} restaurant={restaurantData} key={restaurantData.place_id} />}
-                {restaurantData && drawTheWay && <RoadLine
+                {restaurantData && drawTheRoad && <RoadLine
                     userCoordinate={userCoordinate}
                     restaurantData={restaurantData}
                     handleWayData={(result, isDone) => handleWayData(result, isDone)}
                 />}
             </MapView>
+                */}
             {restaurantData && <RestaurantModal
                 data={restaurantData}
                 isVisible={restaurantModalVisible}
                 closeRestaurantModal={() => setRestaurantModalVisible(false)}
                 onDirectionButtonPress={() => {
-                    setDrawTheWay(true)
+                    setDrawTheRoad(true)
                     setRestaurantModalVisible(false)
                 }} />}
-            {drawTheWay && <DirectionInfoCard
+            {drawTheRoad && <DirectionInfoCard
                 data={roadData}
                 centerTheWay={() => handleWayData(roadData)}
-                deleteWay={() => setDrawTheWay(false)} />}
+                deleteWay={() => setDrawTheRoad(false)} />}
             <UserButton onPress={() => handleMarkerClick(userCoordinate, 'user')} />
             <SearchBar handleLocation={handleMarkerClick} />
         </View>
