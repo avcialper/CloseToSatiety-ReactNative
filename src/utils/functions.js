@@ -1,7 +1,7 @@
 import { PermissionsAndroid } from "react-native"
 import Geolocation from 'react-native-geolocation-service'
 import RestaurantMarker from "../components/markers/RestaurantMarker"
-import {GOOGLE_API} from '@env'
+import { GOOGLE_API } from '@env'
 import { showMessage } from "react-native-flash-message"
 
 export function renderRestaurantMarkers(restaurantsData, handleMarkerClick) {
@@ -12,9 +12,9 @@ export function renderRestaurantMarkers(restaurantsData, handleMarkerClick) {
                     id: restaurant.place_id,
                     address: restaurant.formatted_address,
                     name: restaurant.name,
-                    photoURL: restaurant.photos[0].photo_reference !== undefined ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=300&photoreference=${restaurant.photos[0].photo_reference}&key=${GOOGLE_API}` :
+                    photoURL: restaurant.photos !== undefined ? `https://maps.googleapis.com/maps/api/place/photo?maxwidth=300&photoreference=${restaurant.photos[0].photo_reference}&key=${GOOGLE_API}` :
                         'https://www.shutterstock.com/image-vector/restaurant-logo-food-service-vector-600w-454784548.jpg',
-                    openNow: restaurant.opening_hours.open_now === undefined ? null : restaurant.opening_hours.open_now,
+                    openNow: restaurant.opening_hours === undefined ? null : restaurant.opening_hours.open_now,
                     rating: restaurant.rating,
                     ratingTotal: restaurant.user_ratings_total,
                     icon: restaurant.icon,
@@ -44,7 +44,7 @@ export async function requestLocationPermission() {
                     Geolocation.getCurrentPosition(
                         position => {
                             const { latitude, longitude } = position.coords
-                            resolve({ lat: latitude, long: longitude })
+                            resolve({ lat: latitude, long: longitude, isDone: true })
                         },
                         error => {
                             console.log("Error getting location")

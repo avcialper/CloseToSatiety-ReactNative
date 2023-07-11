@@ -14,6 +14,7 @@ export default ({ handleLocation }) => {
                 key: GOOGLE_API,
                 language: 'en'
             }}
+            textInputProps={{placeholderTextColor: 'grey'}}
             onPress={(data, details = null) => {
                 handleLocation(
                     {

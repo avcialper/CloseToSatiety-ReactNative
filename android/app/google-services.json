@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "128038814168",
+    "project_id": "closetosatiety",
+    "storage_bucket": "closetosatiety.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:128038814168:android:30f060757e271ae9d532ad",
+        "android_client_info": {
+          "package_name": "com.closetosatiety"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "128038814168-id8ecb0bvlf0fbg9p572tbqvt46gbj6g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyASTsV7JYAY8GB17zH_O8XWT_NR2SE212U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "128038814168-id8ecb0bvlf0fbg9p572tbqvt46gbj6g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

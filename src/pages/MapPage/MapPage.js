@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, ActivityIndicator, BackHandler, LogBox } from 'react-native'
+import Geolocation from 'react-native-geolocation-service'
 import MapView from 'react-native-maps'
 import useFetch from '../../hooks/useFetch'
 import SearchBar from '../../components/SearchBar'
@@ -19,16 +20,37 @@ export default ({ route }) => {
     const [restaurantModalVisible, setRestaurantModalVisible] = React.useState(false)
     const [roadData, setRoadData] = React.useState({ distance: null, duration: null })
     const [drawTheRoad, setDrawTheRoad] = React.useState(false)
+    const [locationPermission, setLocationPermission] = React.useState(false)
+
 
     React.useEffect(() => {
         const getLocation = async () => {
-            const location = await requestLocationPermission()
+            const isDone = await requestLocationPermission()
+            setLocationPermission(isDone)
+            liveLocation(isDone)
             setUserCoordinate(location ? location : { lat: 37.78, long: -122.43 })
+            setLocationPermission(location ? location.isDone : false)
             handleMarkerClick(location, "user")
         }
-        getLocation()
+        !locationPermission && getLocation()
+
     }, [])
 
+    const liveLocation = (isDone) => {
+        const watchId = Geolocation.watchPosition(
+            position => {
+                const { latitude, longitude } = position.coords
+                setUserCoordinate({ lat: latitude, long: longitude })
+            },
+            error => {
+                console.warn(error)
+            },
+            { enableHighAccuracy: true, distanceFilter: 1, interval: 3000 }
+        )
+        return () => {
+            isDone && Geolocation.clearWatch(watchId)
+        }
+    }
     React.useEffect(() => {
         if (route?.params !== undefined) {
             setRestaurantData(route.params.data)
@@ -43,8 +65,8 @@ export default ({ route }) => {
         mapRef.current.animateToRegion({
             latitude: coordinates.lat,
             longitude: coordinates.long,
-            latitudeDelta: 0.05,
-            longitudeDelta: 0.05,
+            latitudeDelta: 0.005,
+            longitudeDelta: 0.005,
         })
         if (type === 'restaurant') {
             setRestaurantData(restaurantData)
@@ -80,7 +102,7 @@ export default ({ route }) => {
 
     return (
         <View style={styles.container} >
-            {/*
+            {/* 
             <MapView
                 ref={mapRef}
                 initialRegion={{
@@ -101,7 +123,7 @@ export default ({ route }) => {
                     handleWayData={(result, isDone) => handleWayData(result, isDone)}
                 />}
             </MapView>
-                */}
+        */}
             {restaurantData && <RestaurantModal
                 data={restaurantData}
                 isVisible={restaurantModalVisible}
