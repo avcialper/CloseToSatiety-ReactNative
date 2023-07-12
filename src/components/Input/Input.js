@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, TextInput } from 'react-native'
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons' // Icon package
 import styles from './Input.style'
 
 export default ({ placeholder, text, onChangeText, firstIcon, secondIcon, isSecure = false, changeableIcon = false }) => {
@@ -8,6 +8,7 @@ export default ({ placeholder, text, onChangeText, firstIcon, secondIcon, isSecu
     const [secure, setSecure] = useState(isSecure)
     const [icon, setIcon] = useState(firstIcon)
 
+    // If the icons can change, they change when u press the icon
     const changeIcon = () => {
         if (changeableIcon) {
             if (icon === secondIcon) {

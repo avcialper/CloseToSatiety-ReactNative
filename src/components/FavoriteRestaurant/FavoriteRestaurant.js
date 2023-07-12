@@ -1,8 +1,8 @@
 import React from 'react'
 import { View, Text, Image, Pressable } from 'react-native'
-import styles from './FavoriteRestaurant.style'
+import { Rating } from 'react-native-ratings' // Rating package - rating icon and stats
 import colors from '../../utils/colors'
-import { Rating } from 'react-native-ratings'
+import styles from './FavoriteRestaurant.style'
 
 export default ({ data, onPress }) => {
 

@@ -1,4 +1,4 @@
-import * as yup from 'yup'
+import * as yup from 'yup' // Yup package
 
 const loginValidationsSchema = yup.object().shape({
     email: yup

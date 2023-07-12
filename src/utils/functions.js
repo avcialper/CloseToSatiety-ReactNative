@@ -1,8 +1,8 @@
 import { PermissionsAndroid } from "react-native"
-import Geolocation from 'react-native-geolocation-service'
-import RestaurantMarker from "../components/markers/RestaurantMarker"
-import { GOOGLE_API } from '@env'
-import { showMessage } from "react-native-flash-message"
+import Geolocation from 'react-native-geolocation-service' // Location package
+import RestaurantMarker from "../components/markers/RestaurantMarker"   // Custom component
+import { GOOGLE_API } from '@env'   // GOOGLE API
+import { showMessage } from "react-native-flash-message" // Message package
 
 export function renderRestaurantMarkers(restaurantsData, handleMarkerClick) {
     return restaurantsData.map(restaurant => {

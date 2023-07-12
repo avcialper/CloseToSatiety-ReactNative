@@ -1,7 +1,7 @@
 import React from 'react'
 import { Pressable, Image } from 'react-native'
 
-export default ({onDirectionButtonPress}) => {
+export default ({ onDirectionButtonPress }) => {
     return (
         <Pressable style={{
             borderWidth: 1,
@@ -10,7 +10,7 @@ export default ({onDirectionButtonPress}) => {
             marginHorizontal: 8,
             padding: 8
         }} onPress={onDirectionButtonPress} >
-            <Image source={require('../../assets/direction.png')}/>
+            <Image source={require('../../../assets/direction.png')} />
         </Pressable>
     )
 }

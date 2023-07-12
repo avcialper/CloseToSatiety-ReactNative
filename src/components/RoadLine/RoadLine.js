@@ -1,8 +1,8 @@
 import { LogBox } from 'react-native'
-import MapViewDirections from 'react-native-maps-directions'
-import { showFlashMesssage } from '../../utils/functions'
+import MapViewDirections from 'react-native-maps-directions' // Map package - directions
+import { showFlashMesssage } from '../../utils/functions'   // Npm package assigned to the function
+import { GOOGLE_API } from '@env'   // GOOGLE API
 import colors from '../../utils/colors'
-import { GOOGLE_API } from '@env'
 
 export default ({ userCoordinate, restaurantData, handleWayData }) => {
     return (
@@ -17,16 +17,14 @@ export default ({ userCoordinate, restaurantData, handleWayData }) => {
                 longitude: restaurantData.long
             }}
             strokeWidth={4}
-            strokeColor= {colors.roadLine}
-            onReady={result => {
-                handleWayData(result)
-            }}
+            strokeColor={colors.roadLine}
+            onReady={result => handleWayData(result)} // To fetch directions
             onError={error => {
-                if (error === 'Error on GMAPS route request: ZERO_RESULTS'){
+                if (error === 'Error on GMAPS route request: ZERO_RESULTS') {
                     showFlashMesssage('Road not found!')
                     LogBox.ignoreAllLogs(true)
                     handleWayData(null, false)
-                } 
+                }
             }}
             optimizeWaypoints={true}
         />

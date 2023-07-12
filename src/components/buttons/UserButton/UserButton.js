@@ -5,7 +5,7 @@ import styles from './UserButton.style'
 export default ({ onPress }) => {
     return (
         <Pressable onPress={onPress} style={styles.container} >
-            <Image source={require('../../assets/bigUser.png')} />
+            <Image source={require('../../../assets/bigUser.png')} />
         </Pressable>
     )
 }

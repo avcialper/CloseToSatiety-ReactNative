@@ -1,6 +1,6 @@
 import React from 'react'
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
-import { GOOGLE_API } from '@env'
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete' // Google package - search
+import { GOOGLE_API } from '@env' // GOOGLE API
 import styles from './SearchBar.style'
 
 export default ({ handleLocation }) => {
@@ -14,7 +14,7 @@ export default ({ handleLocation }) => {
                 key: GOOGLE_API,
                 language: 'en'
             }}
-            textInputProps={{placeholderTextColor: 'grey'}}
+            textInputProps={{ placeholderTextColor: 'grey' }}
             onPress={(data, details = null) => {
                 handleLocation(
                     {

@@ -60,7 +60,8 @@ export default StyleSheet.create({
     rating: {
         fontSize: 14,
         fontWeight: '500',
-        marginHorizontal: 12
+        marginHorizontal: 12,
+        color: 'black'
     },
     bottomContainer: {
         flexDirection: 'row',

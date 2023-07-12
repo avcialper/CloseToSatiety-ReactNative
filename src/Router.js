@@ -11,8 +11,8 @@ export default () => {
   return (
     <NavigationContainer theme={{ colors: { secondaryContainer: '#f2600a' } }}>
       <Tab.Navigator activeColor='black' inactiveColor='grey'>
-        <Tab.Screen name='favorite' component={FavoritePage} options={{ title: 'Favorites', tabBarIcon: 'heart' }} />
         <Tab.Screen name='map' component={MapPage} options={{ title: 'Map', tabBarIcon: 'google-maps' }} />
+        <Tab.Screen name='favorite' component={FavoritePage} options={{ title: 'Favorites', tabBarIcon: 'heart' }} />
       </Tab.Navigator>
       <FlashMessage position={'top'} />
     </NavigationContainer>

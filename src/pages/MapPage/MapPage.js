@@ -1,19 +1,19 @@
 import React from 'react'
-import { View, ActivityIndicator, BackHandler, LogBox } from 'react-native'
-import Geolocation from 'react-native-geolocation-service'
-import MapView from 'react-native-maps'
-import useFetch from '../../hooks/useFetch'
-import SearchBar from '../../components/SearchBar'
-import UserMarker from '../../components/markers/UserMarker'
-import RestaurantModal from '../../components/modals/RestaurantModal'
-import DirectionInfoCard from '../../components/DirectionInfoCard'
-import RestaurantMarker from '../../components/markers/RestaurantMarker'
-import RoadLine from '../../components/RoadLine'
-import UserButton from '../../components/UserButton'
+import { View, ActivityIndicator, BackHandler } from 'react-native'
+import Geolocation from 'react-native-geolocation-service' // Location package
+import MapView from 'react-native-maps' // Map package
+import useFetch from '../../hooks/useFetch' // Fetch operation
+import SearchBar from '../../components/SearchBar'  // Custom component
+import UserMarker from '../../components/markers/UserMarker'    // Custom component
+import RestaurantModal from '../../components/modals/RestaurantModal'   // Custom component
+import DirectionInfoCard from '../../components/DirectionInfoCard'  // Custom component
+import RestaurantMarker from '../../components/markers/RestaurantMarker'    // Custom component
+import RoadLine from '../../components/RoadLine'    // Custom component
+import UserButton from '../../components/buttons/UserButton'    // Custom component
+import { renderRestaurantMarkers, requestLocationPermission } from '../../utils/functions' // Functions
 import styles from './MapPage.style'
-import { renderRestaurantMarkers, requestLocationPermission } from '../../utils/functions'
 
-export default ({ route }) => {
+export default ({ navigation, route }) => {
 
     const [userCoordinate, setUserCoordinate] = React.useState({ lat: 37.78, long: -122.43 })
     const [restaurantData, setRestaurantData] = React.useState(null)
@@ -23,20 +23,19 @@ export default ({ route }) => {
     const [locationPermission, setLocationPermission] = React.useState(false)
 
 
-    React.useEffect(() => {
+    React.useEffect(() => { // To get the current location of the user
         const getLocation = async () => {
-            const isDone = await requestLocationPermission()
-            setLocationPermission(isDone)
-            liveLocation(isDone)
-            setUserCoordinate(location ? location : { lat: 37.78, long: -122.43 })
+            const location = await requestLocationPermission()
+            setLocationPermission(location.isDone)
+            liveLocation(location.isDone)
+            setUserCoordinate(location ? { lat: location.lat, long: location.long } : { lat: 37.78, long: -122.43 })
             setLocationPermission(location ? location.isDone : false)
-            handleMarkerClick(location, "user")
         }
         !locationPermission && getLocation()
 
     }, [])
 
-    const liveLocation = (isDone) => {
+    const liveLocation = (isDone) => {  // Real-time location tracking
         const watchId = Geolocation.watchPosition(
             position => {
                 const { latitude, longitude } = position.coords
@@ -51,7 +50,8 @@ export default ({ route }) => {
             isDone && Geolocation.clearWatch(watchId)
         }
     }
-    React.useEffect(() => {
+
+    React.useEffect(() => { // To draw direction from favorite page
         if (route?.params !== undefined) {
             setRestaurantData(route.params.data)
             setDrawTheRoad(true)
@@ -61,7 +61,7 @@ export default ({ route }) => {
     const { data, loading, error } = useFetch(userCoordinate)
     const mapRef = React.useRef()
 
-    const handleMarkerClick = (coordinates = userCoordinate, type, restaurantData = null) => {
+    const handleMarkerClick = (coordinates = userCoordinate, type, restaurantData = null) => { // To handle specific restaurant
         mapRef.current.animateToRegion({
             latitude: coordinates.lat,
             longitude: coordinates.long,
@@ -70,13 +70,12 @@ export default ({ route }) => {
         })
         if (type === 'restaurant') {
             setRestaurantData(restaurantData)
-            console.log(restaurantData)
             setRestaurantModalVisible(true)
             setDrawTheRoad(false)
         }
     }
 
-    const handleWayData = (result, isDone = true) => {
+    const handleRoadData = (result, isDone = true) => { // To handle road directions data
         if (isDone) {
             mapRef.current.fitToCoordinates(result.coordinates, {
                 edgePadding: {
@@ -102,7 +101,6 @@ export default ({ route }) => {
 
     return (
         <View style={styles.container} >
-            {/* 
             <MapView
                 ref={mapRef}
                 initialRegion={{
@@ -120,10 +118,9 @@ export default ({ route }) => {
                 {restaurantData && drawTheRoad && <RoadLine
                     userCoordinate={userCoordinate}
                     restaurantData={restaurantData}
-                    handleWayData={(result, isDone) => handleWayData(result, isDone)}
+                    handleWayData={(result, isDone) => handleRoadData(result, isDone)}
                 />}
             </MapView>
-        */}
             {restaurantData && <RestaurantModal
                 data={restaurantData}
                 isVisible={restaurantModalVisible}
@@ -131,7 +128,13 @@ export default ({ route }) => {
                 onDirectionButtonPress={() => {
                     setDrawTheRoad(true)
                     setRestaurantModalVisible(false)
-                }} />}
+                }}
+                openAccount={() => {
+                    setRestaurantModalVisible(false)
+                    navigation.navigate('favorite', { openSettingsModal: true })
+                    setRestaurantData(null)
+                }}
+            />}
             {drawTheRoad && <DirectionInfoCard
                 data={roadData}
                 centerTheWay={() => handleWayData(roadData)}

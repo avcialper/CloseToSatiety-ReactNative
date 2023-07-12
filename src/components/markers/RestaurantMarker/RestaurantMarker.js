@@ -1,7 +1,6 @@
 import React from 'react'
-import { View, Image, Text } from 'react-native'
-import { Marker } from 'react-native-maps'
-import { GOOGLE_API } from '@env'
+import { View, Image } from 'react-native'
+import { Marker } from 'react-native-maps' // Map package - map marker
 import styles from './RestaurantMarker.style'
 
 export default ({ restaurant, onPress }) => {
@@ -11,7 +10,7 @@ export default ({ restaurant, onPress }) => {
                 latitude: restaurant.lat,
                 longitude: restaurant.long
             }}
-            onPress={() => onPress(
+            onPress={() => onPress(     // To catch selected restaurant data
                 {
                     lat: restaurant.lat,
                     long: restaurant.long
@@ -21,12 +20,7 @@ export default ({ restaurant, onPress }) => {
             )}
         >
             <View style={styles.container} >
-                <Image
-                    source={{
-                        uri: restaurant.photoURL
-                    }}
-                    style={styles.image}
-                />
+                <Image source={{ uri: restaurant.photoURL }} style={styles.image} />
             </View>
         </Marker>
     )

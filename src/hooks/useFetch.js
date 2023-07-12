@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
-import { GOOGLE_API } from '@env'
-import axios from 'axios'
+import { GOOGLE_API } from '@env' // GOOGLE API
+import axios from 'axios'   // Axios package
 
 export default (coordinate) => {
 
