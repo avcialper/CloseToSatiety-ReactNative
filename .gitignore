@@ -1,4 +1,4 @@
 node_modules
 
 .env
-andorid/app/src/main/AndroidManifest.xml
+android/app/src/main/AndroidManifest.xml

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">128038814168-id8ecb0bvlf0fbg9p572tbqvt46gbj6g.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">128038814168</string>
+    <string name="google_api_key" translatable="false">AIzaSyASTsV7JYAY8GB17zH_O8XWT_NR2SE212U</string>
+    <string name="google_app_id" translatable="false">1:128038814168:android:30f060757e271ae9d532ad</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyASTsV7JYAY8GB17zH_O8XWT_NR2SE212U</string>
+    <string name="google_storage_bucket" translatable="false">closetosatiety.appspot.com</string>
+    <string name="project_id" translatable="false">closetosatiety</string>
+</resources>
