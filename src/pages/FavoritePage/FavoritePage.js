@@ -5,6 +5,7 @@ import RestaurantModal from '../../components/modals/RestaurantModal'   // Custo
 import SettingsModal from '../../components/modals/SettingsModal'   // Custom component
 import SettingsButton from '../../components/buttons/SettingsButton'    // Custom component
 import firestore from '@react-native-firebase/firestore'    // Firebase package - firestore database
+import colors from '../../utils/colors'
 import styles from './FavoritePage.style'
 
 export default ({ navigation, route }) => {
@@ -39,7 +40,7 @@ export default ({ navigation, route }) => {
     const renderFavoriteRestaurant = ({ item }) => <FavoriteRestaurant data={item} onPress={handleRestaurant} />
 
     return (
-        <View>
+        <View style={{backgroundColor: colors.pageBackground, flex: 1}} >
             <View style={styles.header} >
                 <Text style={styles.title} >CLOSE TO SATIETY</Text>
                 <SettingsButton onPress={() => setSettingsModalVisible(true)} />

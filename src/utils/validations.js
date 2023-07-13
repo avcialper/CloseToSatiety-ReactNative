@@ -23,6 +23,7 @@ const registerValidationsSchema = yup.object().shape({
     passwordAgain: yup
         .string()
         .oneOf([yup.ref('password'), null], 'Password must match.')
+        .required('Password again is required.')
 })
 
 export { loginValidationsSchema, registerValidationsSchema }

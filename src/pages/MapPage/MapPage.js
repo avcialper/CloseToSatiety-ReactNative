@@ -29,6 +29,7 @@ export default ({ navigation, route }) => {
             setLocationPermission(location.isDone)
             liveLocation(location.isDone)
             setUserCoordinate(location ? { lat: location.lat, long: location.long } : { lat: 37.78, long: -122.43 })
+            handleMarkerClick(location)
             setLocationPermission(location ? location.isDone : false)
         }
         !locationPermission && getLocation()
@@ -137,7 +138,7 @@ export default ({ navigation, route }) => {
             />}
             {drawTheRoad && <DirectionInfoCard
                 data={roadData}
-                centerTheWay={() => handleWayData(roadData)}
+                centerTheWay={() => handleRoadData(roadData)}
                 deleteWay={() => setDrawTheRoad(false)} />}
             <UserButton onPress={() => handleMarkerClick(userCoordinate, 'user')} />
             <SearchBar handleLocation={handleMarkerClick} />
