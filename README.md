@@ -5,7 +5,7 @@ List nearby restaurant. Choose one and  creat a directions. <br/>
 - Creat directions
 - Creat an account 
  
-https://github.com/avcialper/AAStore-ReactNative/assets/90919011/cf671b8e-11e3-4710-ac7e-4ecf53d7233e
+https://github.com/avcialper/CloseToSatiety-ReactNative/assets/90919011/48f0555d-27a1-41b7-8b67-7ed71a84cd00
 
 **Usage Packages**
 - @react-native-firebase/app
